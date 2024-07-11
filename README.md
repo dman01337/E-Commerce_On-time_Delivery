@@ -1,26 +1,17 @@
 ![title](./Images/title.png)
 
 # E-Commerce Shipment On-Time Delivery
-
-
-
-
-### Analysis Overview
-
+## Analysis Overview
 This project analyzes an E-commerce shipment record csv file. We will perform Exporatory Data Analysys (EDA) to assess the data, and create machine learning models to predict the outcome of a target variable (on-time vs. late delivery classification).
 
-
-### Business Problem
-
+## Business Problem
 The company has experienced decline in customer satisfaction and market share at one of its major distribution centers due to <u>excessive late deliveries</u>.
 
 We are charged with: 
 - Analyze the shipping data to find root cause of lateness.
 - Create a model to predict if a shipment will be late, so that the company can  preemptively take corrective action.
 
-
-### Data
-
+## Data
 The dataset used in this analysis contained records of 11,000 shipments, including details regarding:
 - ID 
 - Warehouse block
@@ -37,79 +28,72 @@ The dataset used in this analysis contained records of 11,000 shipments, includi
 
 Source: https://www.kaggle.com/datasets/prachi13/customer-analytics
 
-### Methods
-
+## Methods
 This project uses descriptive analysis and machine learning models to predict whether a shipment will be late or on-time:
 - Data was analyzed for cleanliness:
     - There was no missingness in the raw data in the form of NaN or dummy categories 
     - Extreme outliers in the 'Weight_in_gms' column were removed prior to modeling
-- Target variable for predictive modeling is 'Reached.on.Time_Y.N'
-    - 'Reached.on.Time_Y.N' interpretation: 1 indicates that a shipment was late, 0 indicates on-time
+- Target variable for predictive modeling is 'Shipment_was_late'
+    - 'Shipment_was_late' interpretation: 1 indicates that a shipment was late, 0 indicates on-time
 
-### Results
-
+## Results
 Initial descriptive analysis revealed some problems in the raw data, such as:
-- 'Weight_in_gms' distribution is highly segmented with respect to 'ID' and 'Cost_of_the_Product'
+- 'Weight_in_gms' distribution is highly segmented with respect to 'Cost_of_the_Product'
 - Every single shipment in the weight range 2000 - 4000gm was late
-![wieght_vs_cost](./Images/weight_graphs.png)
+<img src="./Images/weight_graphs.png" alt="description" width="90%" height="auto">
 
-- It appears as though 'Discount_offered' of more than $10 is in response to prior knowledge that a shipment is/will be late:
-![discount_hist](./Images/weight_vs_ID.png)
+- 'Discount_offered' of more than $10 may be in response to prior knowledge that a shipment is late.  Thus, we are excluding 'Discount_offered' from the model to avoid potential data leakage:
+<img src="./Images/discount_hist.png" alt="description" width="75%" height="auto">
 
-For the Medium class, there were six models that had zero fatalities, so we evaluate those models based on non-fatal injury rates:
+The predictive models were evaluated with priority on Recall Score, in order to minimize false-negatives (we want to have the highest chance of detecting late shipments).  Secondary metric evaluated was Accuracy.
 
-![medium_non_fatal](./Images/medium_non_fatal.png)
+The baseline predictive model was Logistic Regression with no hyperparameter tuning, with the following results:
+<img src="./Images/baseline_results.png" alt="description" width="75%" height="auto">
 
-For the Small class, all models had fatalities, so we evaluate those models based on fatal injury rates:
+Here are the results of all models evaluated in thier final-tuning form:
+<img src="./Images/all_models_results.png" alt="description" width="75%" height="auto">
 
-![small_class_fatal_rates](./Images/small_class_fatal_rates.png)
+## Conclusions
+Best Model: Average Probability Classifier:
+- Highest Primary Metric: Recall
+- Accuracy was not the highest, but comparable to other models
+- Combines predictions from multiple models
+- Final Metrics:
 
-# Conclusions
-
-- For the Medium Class aircraft models, we recommend the following, which had the lowest injury rates:
-    1. Boeing 757-223
-    2. Boeing 737-7H4
-    3. Boeing 737
+<img src="./Images/final_metrics.png" alt="description" width="70%" height="auto">
  
- 
-- For the Large Class aircraft models, we recommend the following, which had the lowest injury rates:
-    1. Airbus A321
-    2. Boeing 757-222
-    3. Boeing 747-400
- 
- 
-- We <u>do not</u> recommend the use of Small Class planes because their fatality rate is much higher.
-    - If necessary, small class aircraft with the lowest injury rates were:
-        1. Cessna 180
-        2. Cessna 152
-        3. Cessna 172 
+## Recommendations
+1. Back to square 1: Business Understanding <-> Data Understanding. Address and correct problems in the raw data.
+2. Improve data acquisition methods to increase performance of future models
+3. Implement the Average Probability Classification model as a stop-gap to avoid late shipments until items 1 and 2 can be addressed
 
-# Next Steps
-- Analyze geographic location effects for recommended models to optimize safety
-- Acquire non-accident flight record data to analyze the volume of safe flights by model and potential markets
-- Return on Investment (ROI) analysis based on MSRP data, purchase availability and loan rates for safe model recommendations
+## Next Steps
+1. Prioritize focus on Business/Data Understanding; answer:
+   - Are discounts offered over $10 due to prior knowledge lateness?
+   - Root cause(s) for segmentation in shipment weight data 
+   - Root cause(s) for segmentation in ID… is the data time sequential?
+2. Investigate improving data acquisition: 
+   - What data can we gather that will help us better predict lateness?
+3. Deployment of Average Probability Classification, predict late shipments:
+   - Flag potential late shipments for expediting delivery
+   - If lateness cannot be corrected, preemptively engage with customer to inform, offer discount, etc.
 
 ## For More Information
-
 To see the full data analysis check out the [Jupyter Notebook](./Aircraft_Safety_Risk_Analysis.ipynb) or review the [presentation](./Aircraft_Safety_Risk_Analysis_Presentation.pdf)
 
-Also see the Tableau dashboard interactive visuals here: [Tableau Dashboard](https://public.tableau.com/app/profile/dale.deford/viz/Aircraft_Safety_Risk_Analysis_Dashboard/DASHBOARD?publish=yes)
-
-For any additional questions contact Dale Deford or James Warsing
+For any additional questions contact Dale DeFord or Brian Woo
 
 Dale Deford: daledeford@gmail.com
 
-James Warsing: warsingjt@gmail.com
+Brian Woo: brianhwwoo@gmail.com
 
 ## Repository Structure
-
 ```
 ├── data
 ├── images
 ├── README.md
-├── Aircraft_Safety_Risk_Analysis_Dashboard.twb
-├── Aircraft_Safety_Risk_Analysis_Presentation.pdf
-└── Aircraft_Safety_Risk_Analysis.ipynb
+├── E-commerce_Shipping_Presentation.pdf
+└── E-commerce_Shipping_Notebook.ipynb
 ```
 
 
