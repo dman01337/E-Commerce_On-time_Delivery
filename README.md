@@ -95,8 +95,3 @@ Brian Woo: brianhwwoo@gmail.com
 ├── E-commerce_Shipping_Presentation.pdf
 └── E-commerce_Shipping_Notebook.ipynb
 ```
-
-
-```python
-
-```
