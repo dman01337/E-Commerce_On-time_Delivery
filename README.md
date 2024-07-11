@@ -9,7 +9,7 @@ The company has experienced decline in customer satisfaction and market share at
 
 We are charged with: 
 - Analyze the shipping data to find root cause of lateness.
-- Create a model to predict if a shipment will be late, so that the company can  preemptively take corrective action.
+- Create a model to predict if a shipment will be late, so that the company can  preemptively take corrective action.  
 
 ## Data
 The dataset used in this analysis contained records of 11,000 shipments, including details regarding:
