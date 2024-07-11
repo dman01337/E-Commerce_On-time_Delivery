@@ -79,7 +79,7 @@ Best Model: Average Probability Classifier:
    - If lateness cannot be corrected, preemptively engage with customer to inform, offer discount, etc.
 
 ## For More Information
-To see the full data analysis check out the [Jupyter Notebook](./Aircraft_Safety_Risk_Analysis.ipynb) or review the [presentation](./Aircraft_Safety_Risk_Analysis_Presentation.pdf)
+To see the full data analysis check out the [Jupyter Notebook](./E-commerce_Shipping_Notebook.ipynb) or review the [presentation](./E-commerce_Shipping_Presentation.pdf)
 
 For any additional questions contact Dale DeFord or Brian Woo
 
