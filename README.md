@@ -1,59 +1,60 @@
-![title_airplane](./Images/title_airplane.png)
+![title](./Images/title.png)
 
-# Aircraft Risk Analysis
+# E-Commerce Shipment On-Time Delivery
 
-https://www.kaggle.com/datasets/prachi13/customer-analytics
+
+
 
 ### Analysis Overview
 
+This project analyzes an E-commerce shipment record csv file. We will perform Exporatory Data Analysys (EDA) to assess the data, and create machine learning models to predict the outcome of a target variable (on-time vs. late delivery classification).
 
-
-The overall goal of this analysis is to evaluate the [Aviation Accident Database](https://www.kaggle.com/datasets/khsamaha/aviation-accident-database-synopses) to determine which aircraft pose the least amount of risk for injuries. This analysis will show which aircrafts should be taken into account for potential commercial or private use.
-- Assesses risk based on fatal and non-fatal injury rates of aircraft models
-
-- Recommendation of three safest aircraft models for each of three passenger capacity classes (small, medium, large)
 
 ### Business Problem
 
+The company has experienced decline in customer satisfaction and market share at one of its major distribution centers due to <u>excessive late deliveries</u>.
 
-
-A company is expanding into the aircraft industry to
-diversify its portfolio. Specifically, they are interested
-in purchasing and operating airplanes for commercial
-and private enterprises, but are unaware of the potential risks of aircraft. The goal here is to evaluate which aircraft provides the best fit for the company by assessing the personal injury risk by aircraft model.
+We are charged with: 
+- Analyze the shipping data to find root cause of lateness.
+- Create a model to predict if a shipment will be late, so that the company can  preemptively take corrective action.
 
 
 ### Data
 
+The dataset used in this analysis contained records of 11,000 shipments, including details regarding:
+- ID 
+- Warehouse block
+- Mode of shipment
+- Customer care calls
+- Customer rating
+- Cost of product
+- Prior purchases
+- Product importance
+- Gender
+- Discount offered
+- Weight
+- Was the shipment late?
 
-
-The [Aviation Accident Database](https://www.kaggle.com/datasets/khsamaha/aviation-accident-database-synopses) provides extensive data of aircraft accidents since the year 1948. We can use this dataset to find which aircrafts have the smallest potential for injury. The dataset also includes a wealth of data related to aircrafts and the accidents over the past few decades to help us narrow down the best fits.
+Source: https://www.kaggle.com/datasets/prachi13/customer-analytics
 
 ### Methods
 
-
-This project uses descriptive analysis to identify aircraft models that meet the following criteria:
-- A minimum of 1000 total passengers involved in accidents over the history of the model, for adequate sample size
-- Fatal and Non-fatal injury rates were calculated for each model considered:
-    - Minimization of fatal injury rates were prioritized
-    - For aircraft that did not have fatalities in thier history, non-fatal injury rates were considered
-
-Aircraft were binned into three categories based on passenger capacity (small, medium, large). Recommendations for top three safest aircraft were made for each capacity category based on the criteria above.
+This project uses descriptive analysis and machine learning models to predict whether a shipment will be late or on-time:
+- Data was analyzed for cleanliness:
+    - There was no missingness in the raw data in the form of NaN or dummy categories 
+    - Extreme outliers in the 'Weight_in_gms' column were removed prior to modeling
+- Target variable for predictive modeling is 'Reached.on.Time_Y.N'
+    - 'Reached.on.Time_Y.N' interpretation: 1 indicates that a shipment was late, 0 indicates on-time
 
 ### Results
 
-Here we can see the average fatality rates for each class of plane:
-- Small: 1-2 passengers
-- Medium: 3-150 passengers
-- Large: >150 passengers
+Initial descriptive analysis revealed some problems in the raw data, such as:
+- 'Weight_in_gms' distribution is highly segmented with respect to 'ID' and 'Cost_of_the_Product'
+- Every single shipment in the weight range 2000 - 4000gm was late
+![wieght_vs_cost](./Images/weight_graphs.png)
 
-
-
-![fatal_rates_by_class](./Images/fatal_rates_by_class.png)
-
-For the Large class, there were eight models that had zero fatalities, so we evaluate those models based on non-fatal injury rates:
-
-![large_non_fatal](./Images/large_non_fatal.png)
+- It appears as though 'Discount_offered' of more than $10 is in response to prior knowledge that a shipment is/will be late:
+![discount_hist](./Images/weight_vs_ID.png)
 
 For the Medium class, there were six models that had zero fatalities, so we evaluate those models based on non-fatal injury rates:
 
